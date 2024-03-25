@@ -6,16 +6,11 @@ interface CheckoutLayoutProps {
 
 export default function CheckoutLayout({ children }: CheckoutLayoutProps) {
   return (
-    <div className="flex flex-wrap w-full h-screen">
-      {/* Columna Izquierda */}
-      <div className="w-full md:w-1/2">
-        {children[0]} {/* Contenido de la columna izquierda */}
+    <div className="flex flex-wrap h-screen">
+      <div className="w-full md:w-1/2 flex justify-center ">
+        <div className="max-w-[80%] flex grow mt-10">{children[0]}</div>
       </div>
-
-      {/* Columna Derecha */}
-      <div className="w-full md:w-1/2">
-        {children[1]} {/* Contenido de la columna derecha */}
-      </div>
+      <div className="w-full md:w-1/2  shadow-xl">{children[1]}</div>
     </div>
   );
 }

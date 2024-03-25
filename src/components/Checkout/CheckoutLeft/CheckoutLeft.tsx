@@ -1,26 +1,17 @@
+import FooterLeft from './FooterLeft/FooterLeft';
+import Navbar from './Navbar/Navbar';
+import PriceSection from './PriceSection/PriceSection';
+
 function CheckoutLeft() {
-  return <div className="bg-red-500 h-[100%]">
-    {/* Navbar */}
-    <div>
-      
-    </div>
-
-    {/* PriceSection */}
-    <div>
-      {/* PriceTitle */}
-      <div>
-        {/* PriceDetails */}
-        <div>
-
-        </div>
+  return (
+    <div className="h-screen w-full flex flex-col">
+      <Navbar />
+      <PriceSection />
+      <div className="mt-auto">
+        <FooterLeft />
       </div>
     </div>
-    
-    {/* FooterLeft */}
-    <div>
-
-    </div>
-  </div>
+  );
 }
 
 export default CheckoutLeft;

@@ -5,7 +5,7 @@ const config: Config = {
   theme: {
     extend: {
       boxShadow: {
-        md: '0 0 0 3px rgba(58, 151, 212, 0.36)'
+        'md-blue': '0 0 0 3px rgba(58, 151, 212, 0.36)'
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

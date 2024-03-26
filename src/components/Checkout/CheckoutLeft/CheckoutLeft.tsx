@@ -1,15 +1,17 @@
 import FooterLeft from './FooterLeft/FooterLeft';
 import Navbar from './Navbar/Navbar';
 import PriceSection from './PriceSection/PriceSection';
+import { selectDeviceSelected } from 'checkoutPagePreview/previewSlice';
+import { DEVICES_OPTIONS_ENUM } from 'checkoutPagePreview/devicesOptionsEnum';
+import { useSelector } from 'react-redux';
 
 function CheckoutLeft() {
+  const deviceSelected = useSelector(selectDeviceSelected);
   return (
-    <div className="h-screen w-full flex flex-col">
+    <div className="w-full flex flex-col">
       <Navbar />
       <PriceSection />
-      <div className="mt-auto">
-        <FooterLeft />
-      </div>
+      {deviceSelected === DEVICES_OPTIONS_ENUM.DESKTOP && <FooterLeft />}
     </div>
   );
 }

@@ -7,18 +7,22 @@ import PromotionalCode from './PromotionalCode/PromotionalCode';
 import ShippingDetail from './ShippingDetail/ShippingDetail';
 import SalesTaxes from './SalesTaxes/SalexTaxes';
 import Total from './Total/Total';
+import { selectDeviceSelected } from 'checkoutPagePreview/previewSlice';
+import { DEVICES_OPTIONS_ENUM } from 'checkoutPagePreview/devicesOptionsEnum';
 
 function PriceSummary() {
   const checkoutMode = useSelector(selectCheckoutMode);
   const showCoupons = useSelector(selectCoupons);
   const showShipping = useSelector(selectShipping);
   const showTaxSupport = useSelector(selectTaxSupport);
+  const deviceSelected = useSelector(selectDeviceSelected);
+
   return (
     <div className="ml-[58px]">
       <div className="border-t-[1px] w-full self-end flex flex-col pt-3 gap-4">
         {checkoutMode === CHECKOUT_MODE_ENUM.ON_CUSTOMIZATION ? <GeneralItemSkeleton /> : <Subtotal />}
         <>
-          {(checkoutMode === CHECKOUT_MODE_ENUM.NONE || !!showCoupons) && <PromotionalCode />}
+          {(checkoutMode === CHECKOUT_MODE_ENUM.NONE || !!showCoupons) && deviceSelected === DEVICES_OPTIONS_ENUM.DESKTOP && <PromotionalCode />}
           {checkoutMode === CHECKOUT_MODE_ENUM.ON_CUSTOMIZATION && !showCoupons && <GeneralItemSkeleton />}
         </>
         <>

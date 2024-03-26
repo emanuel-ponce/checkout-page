@@ -6,7 +6,7 @@ loadTranslations(i18n);
 
 function FooterPolicies({ t }: WithTranslation) {
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-2 text-gray-500/80">
       <a href="https://stripe.com/es/legal/consumer" target="_blank">
         {t('FOOTER_POLICIES.LEGAL')}
       </a>

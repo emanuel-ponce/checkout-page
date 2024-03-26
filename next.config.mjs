@@ -10,6 +10,9 @@ const remotes = isServer => {
 
 const nextConfig = {
   reactStrictMode: true,
+  images: {
+    domains: ['images.unsplash.com', 'www.cicloplast.com', 'static-00.iconduck.com']
+  },
   webpack: (config, options) => {
     config.plugins.push(
       new NextFederationPlugin({
@@ -17,7 +20,7 @@ const nextConfig = {
         filename: 'static/chunks/remoteEntry.js',
         remotes: remotes(options.isServer),
         exposes: {
-          './testComponent': './src/components/Test.tsx'
+          // './testComponent': './src/components/Test.tsx'
         },
         extraOptions: {
           exposePages: true

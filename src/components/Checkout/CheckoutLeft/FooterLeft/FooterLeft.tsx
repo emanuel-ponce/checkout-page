@@ -1,21 +1,24 @@
+import { useSelector } from 'react-redux';
+import FooterBrand from './FooterBrand/FooterBrand';
+import FooterBrandSkeleton from './FooterBrand/FooterBrandSkeleton/FooterBrandSkeleton';
+import FooterPolicies from './FooterPolicies/FooterPolicies';
+import FooterPoliciesSkeleton from './Skeletons/FooterPoliciesSkeleton';
+import { selectStorePolicies } from 'checkoutPagePreview/customizationSlice';
+import { selectCheckoutMode, CHECKOUT_MODE_ENUM } from 'checkoutPagePreview/stepperSlice';
+
 function FooterLeft() {
+  const showPolicies = useSelector(selectStorePolicies);
+  const checkoutMode = useSelector(selectCheckoutMode);
   return (
     <div className="flex gap-2 items-center justify-center text-xs pb-2">
-      <div>
-        Powered by <span className="font-semibold">Stripe</span>
-      </div>
-      <div className="border-l-[1px] border-slate-400 h-4"></div>
-      <div className="flex gap-2">
-        <a href="https://stripe.com/es/legal/consumer" target="_blank">
-          Legal
-        </a>
-        <a href="https://support.stripe.com/topics/refunds" target="_blank">
-          Returns
-        </a>
-        <a href="https://stripe.com/es/contact" target="_blank">
-          Contact
-        </a>
-      </div>
+      {checkoutMode === CHECKOUT_MODE_ENUM.ON_CUSTOMIZATION ? <FooterBrandSkeleton /> : <FooterBrand />}
+      {(checkoutMode === CHECKOUT_MODE_ENUM.NONE || !!showPolicies) && (
+        <>
+          <div className="border-l-[1px] border-slate-400 h-4"></div>
+          <FooterPolicies />
+        </>
+      )}
+      {checkoutMode === CHECKOUT_MODE_ENUM.ON_CUSTOMIZATION && !showPolicies && <FooterPoliciesSkeleton />}
     </div>
   );
 }

@@ -1,32 +1,36 @@
+import { useSelector } from 'react-redux';
+import GeneralItemSkeleton from './GeneralItemSkeleton';
+import { selectCoupons, selectShipping, selectTaxSupport } from 'checkoutPagePreview/customizationSlice';
+import { selectCheckoutMode, CHECKOUT_MODE_ENUM } from 'checkoutPagePreview/stepperSlice';
+import Subtotal from './Subtotal/Subtotal';
+import PromotionalCode from './PromotionalCode/PromotionalCode';
+import ShippingDetail from './ShippingDetail/ShippingDetail';
+import SalesTaxes from './SalesTaxes/SalexTaxes';
+import Total from './Total/Total';
+
 function PriceSummary() {
+  const checkoutMode = useSelector(selectCheckoutMode);
+  const showCoupons = useSelector(selectCoupons);
+  const showShipping = useSelector(selectShipping);
+  const showTaxSupport = useSelector(selectTaxSupport);
   return (
     <div className="ml-[58px]">
       <div className="border-t-[1px] w-full self-end flex flex-col pt-3 gap-4">
-        <div className="flex justify-between">
-          <span className="text-sm font-medium">Subtotal</span>
-          <span className="text-sm font-medium">$129.00</span>
-        </div>
-        <div>
-          <button className="rounded-sm text-sm p-1 font-semibold focus:shadow-md">Add promotional code</button>
-        </div>
-        <div className="flex justify-between">
-          <div className="flex flex-col">
-            <span className="text-sm">Shipping</span>
-            <span className="text-[10px]">Free shipping (5-7 business days)</span>
-          </div>
-          <span className="text-sm">Free</span>
-        </div>
-        <div className="flex justify-between">
-          <span className="text-sm">Sales tax (6.5%)</span>
-          <span className="text-sm">$4.23</span>
-        </div>
+        {checkoutMode === CHECKOUT_MODE_ENUM.ON_CUSTOMIZATION ? <GeneralItemSkeleton /> : <Subtotal />}
+        <>
+          {(checkoutMode === CHECKOUT_MODE_ENUM.NONE || !!showCoupons) && <PromotionalCode />}
+          {checkoutMode === CHECKOUT_MODE_ENUM.ON_CUSTOMIZATION && !showCoupons && <GeneralItemSkeleton />}
+        </>
+        <>
+          {(checkoutMode === CHECKOUT_MODE_ENUM.NONE || !!showShipping) && <ShippingDetail />}
+          {checkoutMode === CHECKOUT_MODE_ENUM.ON_CUSTOMIZATION && !showShipping && <GeneralItemSkeleton />}
+        </>
+        <>
+          {(checkoutMode === CHECKOUT_MODE_ENUM.NONE || !!showTaxSupport) && <SalesTaxes />}
+          {checkoutMode === CHECKOUT_MODE_ENUM.ON_CUSTOMIZATION && !showTaxSupport && <GeneralItemSkeleton />}
+        </>
       </div>
-      <div className="border-t-[1px] w-full self-end flex flex-col pt-3 gap-4 mt-3">
-        <div className="flex justify-between">
-          <span className="text-sm font-medium">Total due</span>
-          <span className="text-sm font-medium">$133.23</span>
-        </div>
-      </div>
+      <div className="border-t-[1px] w-full self-end flex flex-col pt-3 gap-4 mt-3">{checkoutMode === CHECKOUT_MODE_ENUM.ON_CUSTOMIZATION ? <GeneralItemSkeleton /> : <Total />}</div>
     </div>
   );
 }

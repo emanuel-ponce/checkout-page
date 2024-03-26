@@ -14,12 +14,16 @@ import { withTranslation } from 'react-i18next';
 import { WithTranslation } from 'next-i18next';
 import { loadTranslations } from './i18n/translations';
 import i18n from '@/shared/i18n/i18n.config';
+import FooterLeft from '../CheckoutLeft/FooterLeft/FooterLeft';
+import { selectDeviceSelected } from 'checkoutPagePreview/previewSlice';
+import { DEVICES_OPTIONS_ENUM } from 'checkoutPagePreview/devicesOptionsEnum';
 loadTranslations(i18n);
 
 function CheckoutRight({ t }: WithTranslation) {
   const checkoutMode = useSelector(selectCheckoutMode);
   const isShippingSelected = useSelector(selectShipping);
   const isPhoneNumberSelected = useSelector(selectPhoneNumber);
+  const deviceSelected = useSelector(selectDeviceSelected);
   const initialValues = {
     email: '',
     fullName: '',
@@ -56,6 +60,11 @@ function CheckoutRight({ t }: WithTranslation) {
           )}
         </Formik>
       </div>
+      {deviceSelected === DEVICES_OPTIONS_ENUM.MOBILE && (
+        <div className="mt-4">
+          <FooterLeft />
+        </div>
+      )}
     </div>
   );
 }

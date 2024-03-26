@@ -24,5 +24,9 @@ export function useUtilsTranslate() {
   const { i18n } = useTranslation();
   const translate = (object: Translate) => object?.[i18n.languages[0] as keyof Translate];
   const currentTranslation = (): TranslateEnum => i18n.languages[0] as TranslateEnum;
-  return { translate, currentTranslation };
+  const changeLanguage = (language: string) => {
+    i18n.changeLanguage(language);
+  };
+
+  return { translate, currentTranslation, changeLanguage };
 }

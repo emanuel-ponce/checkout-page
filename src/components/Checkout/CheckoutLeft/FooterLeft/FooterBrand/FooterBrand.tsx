@@ -1,7 +1,7 @@
 function FooterBrand() {
   return (
-    <div>
-      Powered by <span className="font-semibold">Stripe</span>
+    <div className="text-gray-500/80">
+      Powered by <span className="font-bold">Stripe</span>
     </div>
   );
 }

@@ -35,7 +35,7 @@ function CheckoutRight({ t }: WithTranslation) {
   const onSubmit = () => {};
 
   return (
-    <div className="h-screen w-full flex flex-col">
+    <div className="w-full flex flex-col">
       <div>{checkoutMode === CHECKOUT_MODE_ENUM.ON_CUSTOMIZATION ? <WalletPaySkeleton /> : <WalletPay />}</div>
       {checkoutMode === CHECKOUT_MODE_ENUM.ON_CUSTOMIZATION ? <SeparatorSkeleton /> : <Separator text={t('CHECKOUT_RIGHT.SEPARATOR')} />}
       <div>

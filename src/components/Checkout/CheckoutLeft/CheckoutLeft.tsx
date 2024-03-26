@@ -4,12 +4,10 @@ import PriceSection from './PriceSection/PriceSection';
 
 function CheckoutLeft() {
   return (
-    <div className="h-screen w-full flex flex-col">
+    <div className="w-full flex flex-col">
       <Navbar />
       <PriceSection />
-      <div className="mt-auto">
-        <FooterLeft />
-      </div>
+      <FooterLeft />
     </div>
   );
 }

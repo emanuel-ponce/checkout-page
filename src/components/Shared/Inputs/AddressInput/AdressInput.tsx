@@ -25,7 +25,7 @@ export interface AdressInputProps {
       handleChange?: (e: any) => any;
       disabled?: boolean;
     };
-    phoneNumber: {
+    phoneNumber?: {
       inputName: string;
       placeholder?: string;
       handleChange?: (e: any) => any;
@@ -39,7 +39,7 @@ export default function AdressInput({ inputs, label }: AdressInputProps) {
   const [propsFullName, metaFullName, helpersFullName] = useField(fullName.inputName);
   const [propsLocation, metaLocation, helpersLocation] = useField(location.inputName);
   const [propsAddress, metaAddress, helpersAddress] = useField(address.inputName);
-  const [propsPhoneNumber, metaPhoneNumber, helpersPhoneNumber] = useField(phoneNumber.inputName);
+  const [propsPhoneNumber, metaPhoneNumber, helpersPhoneNumber] = useField(phoneNumber?.inputName || '');
   return (
     <div className="flex flex-col">
       <label className="label-form">{label}</label>
@@ -52,6 +52,17 @@ export default function AdressInput({ inputs, label }: AdressInputProps) {
         value={metaFullName.value}
         disabled={fullName.disabled}
       />
+      {phoneNumber && (
+        <Field
+          className={`form-control rounded-none ${phoneNumber.disabled ? 'bg-grey-200 text-grey-400' : ''}`}
+          type="text"
+          name={phoneNumber.inputName}
+          placeholder={phoneNumber.placeholder}
+          onChange={phoneNumber.handleChange}
+          value={metaPhoneNumber.value}
+          disabled={phoneNumber.disabled}
+        />
+      )}
       <Field
         className={`form-control rounded-none ${location.disabled ? 'bg-grey-200 text-grey-400' : ''}`}
         as="select"
@@ -68,22 +79,13 @@ export default function AdressInput({ inputs, label }: AdressInputProps) {
         ))}
       </Field>
       <Field
-        className={`form-control  rounded-none ${address.disabled ? 'bg-grey-200 text-grey-400' : ''}`}
+        className={`form-control rounded-t-none ${address.disabled ? 'bg-grey-200 text-grey-400' : ''}`}
         type="text"
         name={address.inputName}
         placeholder={address.placeholder}
         onChange={address.handleChange}
         value={metaAddress.value}
         disabled={address.disabled}
-      />
-      <Field
-        className={`form-control  rounded-t-none ${phoneNumber.disabled ? 'bg-grey-200 text-grey-400' : ''}`}
-        type="text"
-        name={phoneNumber.inputName}
-        placeholder={phoneNumber.placeholder}
-        onChange={phoneNumber.handleChange}
-        value={metaPhoneNumber.value}
-        disabled={phoneNumber.disabled}
       />
     </div>
   );

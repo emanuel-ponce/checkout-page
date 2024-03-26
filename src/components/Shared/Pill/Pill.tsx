@@ -1,15 +1,10 @@
 interface PillProps {
   text: string;
-  bgColor: string;
-  textColor: string;
+  className?: string;
 }
 
-function Pill({ text, bgColor, textColor }: PillProps) {
-  return (
-    <div className="rounded-sm font-bold p-[2px] text-[10px]" style={{ backgroundColor: bgColor, color: textColor }}>
-      {text}
-    </div>
-  );
+function Pill({ text, className }: PillProps) {
+  return <div className={`rounded-[3px] font-bold py-[2px] px-[3px] text-[10px] ${className}`}>{text}</div>;
 }
 
 export default Pill;

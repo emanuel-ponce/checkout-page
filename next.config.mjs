@@ -4,7 +4,7 @@ import { NextFederationPlugin } from '@module-federation/nextjs-mf';
 const remotes = isServer => {
   const location = isServer ? 'ssr' : 'chunks';
   return {
-    checkoutPagePreview: `checkoutPagePreview@http://localhost:3000/_next/static/${location}/remoteEntry.js`
+    checkoutPagePreview: `checkoutPagePreview@${process.env.NEXT_PUBLIC_CHECKOUT_PAGE_PREVIEW_URL}/_next/static/${location}/remoteEntry.js`
   };
 };
 

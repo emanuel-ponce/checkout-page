@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "set NEXT_PRIVATE_LOCAL_WEBPACK=true && next dev -p 3001",
+    "dev": "next dev -p 3001",
+    "dev:windows": "set NEXT_PRIVATE_LOCAL_WEBPACK=true && next dev -p 3001",
+    "dev:unix": "export NEXT_PRIVATE_LOCAL_WEBPACK=true && next dev -p 3001",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
